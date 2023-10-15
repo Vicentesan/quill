@@ -1,0 +1,39 @@
+import { cn } from '@/lib/utils'
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import Navbar from '@/components/Navbar'
+import Providers from '@/components/Providers'
+
+import "react-loading-skeleton/dist/skeleton.css"
+import "simplebar-react/dist/simplebar.min.css"
+
+import { Toaster } from 'sonner'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Quill',
+  description: 'The only way to chat with your documents',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className='light'>
+      <Providers>
+      <body className={cn(
+        'min-h-screen font-sans antialiased grainy ',
+        inter.className
+      )}>
+        <Toaster expand={false} position="top-right" richColors closeButton/>
+        <Navbar />
+        {children}
+        </body>
+        </Providers>
+    </html>
+  )
+}
