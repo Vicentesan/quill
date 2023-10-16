@@ -1,5 +1,11 @@
 import { getUserSubscriptionPlan } from "@/lib/stripe";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "./ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import Image from "next/image";
@@ -14,7 +20,11 @@ interface UserAccountNavProps {
   name: string;
 }
 
-const UserAccountNav = async ({ email, imageUrl, name}: UserAccountNavProps) => {
+const UserAccountNav = async ({
+  email,
+  imageUrl,
+  name,
+}: UserAccountNavProps) => {
   const subscriptionPlan = await getUserSubscriptionPlan();
 
   return (
@@ -51,26 +61,38 @@ const UserAccountNav = async ({ email, imageUrl, name}: UserAccountNavProps) => 
             )}
           </div>
         </div>
-        
+
         <DropdownMenuSeparator />
 
-      <DropdownMenuItem asChild>
-        <Link className='cursor-pointer' href='/dashboard'>Dashboard</Link>
-      </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link className="cursor-pointer" href="/dashboard">
+            Dashboard
+          </Link>
+        </DropdownMenuItem>
 
-      <DropdownMenuItem asChild>
-        {subscriptionPlan?.isSubscribed ? (
-          <Link className='cursor-pointer' href='/dashboard/billing'>Manage subscription</Link>
-        ) : (
-          <Link className='cursor-pointer' href='/pricing'>Upgrade</Link>
-        )}
-      </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          {subscriptionPlan?.isSubscribed ? (
+            <Link className="cursor-pointer" href="/dashboard/billing">
+              Manage subscription
+            </Link>
+          ) : (
+            <Link className="cursor-pointer" href="/pricing">
+              Upgrade
+            </Link>
+          )}
+        </DropdownMenuItem>
 
-      <DropdownMenuSeparator />
+        <DropdownMenuSeparator />
 
-      <DropdownMenuItem className='flex gap-2 cursor-pointer focus:bg-destructive'>
-          <LogoutLink>Log out</LogoutLink><LogOut className='h-4 w-4'/>
-      </DropdownMenuItem>
+        <DropdownMenuItem className="flex gap-2 cursor-pointer focus:bg-destructive">
+          <Link
+            className="flex items-center w-full font-semibold"
+            href="/sign-out"
+          >
+            Log out
+          </Link>
+          <LogOut className="h-4 w-4" />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
