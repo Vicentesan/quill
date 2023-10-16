@@ -86,8 +86,15 @@ export const appRouter = router({
 
     return await db.file.findMany({
       where: {
-        userId
-      }
+        userId,
+      },
+      include: {
+        _count: {
+          select: {
+            messages: true,
+          },
+        },
+      },
     })
   }),
   getFile: privateProcedure.input(z.object({key: z.string()})).mutation(async ({ctx, input}) => {
