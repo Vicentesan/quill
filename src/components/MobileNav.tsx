@@ -80,6 +80,16 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                     Dashboard
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    onClick={() =>
+                      closeOnCurrent('/dashboard/billing')
+                    }
+                    className='flex items-center w-full font-semibold'
+                    href='/dashboard/billing'>
+                    Manage Subscription
+                  </Link>
+                </li>
                 <li className='my-3 h-px w-full bg-gray-300' />
                 <li>
                   <Link
