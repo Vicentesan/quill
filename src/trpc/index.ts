@@ -7,6 +7,7 @@ import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query';
 import { absoluteUrl } from '@/lib/utils';
 import { getUserSubscriptionPlan, stripe } from '@/lib/stripe';
 import { PLANS } from '@/config/stripe';
+import { utapi } from 'uploadthing/server';
 
 export const appRouter = router({
   authCallback: publicProcedure.query(async () => {
@@ -189,7 +190,8 @@ export const appRouter = router({
         id: input.id,
       },
     })
-    
+    await utapi.deleteFiles(file.key)
+    console.log('File with id' + file.key + ' was deleted')
     return file
   }),
 
