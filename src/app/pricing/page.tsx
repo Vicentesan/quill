@@ -161,7 +161,7 @@ const Page = () => {
                 ) : user ? (
                   <UpgradeButton />
                 ) : (
-                  <Link href='/sing-in' className={buttonVariants({
+                  <Link href='/sign-in' className={buttonVariants({
                     className: 'w-full',
                   })}>
                     {user ? 'Upgrade now' : 'Sing up'}
