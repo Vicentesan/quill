@@ -4,6 +4,8 @@ import { cn, constructMetadata } from '@/lib/utils'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import "react-loading-skeleton/dist/skeleton.css"
 import "simplebar-react/dist/simplebar.min.css"
 
@@ -20,6 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='light'>
+      <SpeedInsights/>
       <Providers>
       <body className={cn(
         'min-h-screen font-sans antialiased grainy ',
