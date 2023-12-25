@@ -77,7 +77,7 @@ export const POST = async (req: NextRequest) => {
       {
         role: 'system',
         content:
-          'Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format. The user can call the context on diferent ways and different languages, so you need to understant the language and get the way the user is calling the context, like, PDF, document, text...',
+          'Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format.',
       },
       {
         role: 'user',
@@ -93,7 +93,7 @@ export const POST = async (req: NextRequest) => {
   
   \n----------------\n
   
-  CONTEXT:
+  CONTEXT/PDF/DOCUMENT:
   ${results.map((r) => r.pageContent).join('\n\n')}
   
   USER INPUT: ${message}`,
