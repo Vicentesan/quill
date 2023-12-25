@@ -200,31 +200,6 @@ export const appRouter = router({
       console.log("File with id" + file.key + " was deleted");
       return file;
     }),
-  createStripeProduct: privateProcedure
-    .input(
-      z.object({
-        name: z.string(),
-        description: z.string(),
-        features: z.array(
-          z.object({
-            name: z.string(),
-          })
-        ),
-        images: z.array(z.string()).optional(),
-      })
-    )
-    .mutation(async ({ input }) => {
-      if (!input || !input.name) throw new TRPCError({ code: "BAD_REQUEST" });
-
-      const products = await stripe.products.create({
-        description: input.description,
-        name: input.name,
-        features: input.features,
-        images: input.images,
-      });
-
-      return { status: 201, products };
-    }),
 });
 
 export type AppRouter = typeof appRouter;
