@@ -3,8 +3,9 @@
 import { ArrowRight } from "lucide-react"
 import { Button } from "./ui/button"
 import { trpc } from "@/app/_trpc/client"
+import { getUserSubscriptionPlan } from "@/lib/stripe"
 
-const UpgradeButton = () => {
+const UpgradeButton = ({ plan }: { plan?: string }) => {
 
   const { mutate: createStripeSession} = trpc.createStripeSession.useMutation({
     onSuccess: ({url}) => {
@@ -14,7 +15,7 @@ const UpgradeButton = () => {
 
   return (
     <Button onClick={() => createStripeSession()} className='w-full'>
-      Upgrade now <ArrowRight className='h-5 w-5 ml-1.5'/>
+      {plan ===  'Pro' ? 'Manage subscription' : 'Upgrade now'} <ArrowRight className='h-5 w-5 ml-1.5'/>
     </Button>
   )
 

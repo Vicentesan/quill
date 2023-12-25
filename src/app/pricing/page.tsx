@@ -7,10 +7,15 @@ import { cn } from "@/lib/utils"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { ArrowRight, Check, HelpCircle, Minus } from "lucide-react"
 import Link from "next/link"
+import { getUserSubscriptionPlan } from "@/lib/stripe"
 
-const Page = () => {
+const Page = async () => {
   const { getUser } = getKindeServerSession()
   const user = getUser()
+
+  const subscriptionPlan = await getUserSubscriptionPlan()
+
+  let currenctPlan = subscriptionPlan ? subscriptionPlan.name : 'Free'
 
   const pricingItems = [
     {
@@ -159,7 +164,7 @@ const Page = () => {
                     <ArrowRight className='h-5 w-5 ml-1.5'/>
                   </Link>
                 ) : user ? (
-                  <UpgradeButton />
+                  <UpgradeButton plan={currenctPlan}/>
                 ) : (
                   <Link href='/sign-in' className={buttonVariants({
                     className: 'w-full',
